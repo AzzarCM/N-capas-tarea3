@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Granted</title>
+</head>
+<body>
+
+	   <div id="content-wrapper">
+
+      <div class="container-fluid">
+			<h1 class="mt-4">Par&aacute;metros enviados</h1>
+			<div class="card mb-4">
+            	<div class="card-body">
+            		<p class="mb-0">El alumno <b><span th:text="${nombre}"></span></b> a sido ingresado con exito</p>
+            	</div>
+            </div>
+          <form method="post" th:action="@{/ingresar}">
+            <input type="submit" class="btn btn-primary" value="Ingresar Nuevo Alumno">
+        </form>
+            
+      </div>
+  
+</body>
+</html>
