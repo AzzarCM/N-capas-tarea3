@@ -1,6 +1,5 @@
 package com.uca.capas.tarea3.controller;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
-	
+
 	@RequestMapping("/ingresar")
 	public ModelAndView ingresar() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("ingresar");
 		return mav;
 	}
-	
+
 	@RequestMapping("/alumno")
 	public ModelAndView alumno(
 			@RequestParam String nombre, 
@@ -44,11 +43,13 @@ public class MainController {
 			arrayError.add("la longitud del APELLIDO incumple los requisitos, debe ser mayor a 1 y menor a 25");
 		}
 		
+		System.out.println(nacimiento);
+		
 		if(compararFecha(nacimiento)){
 			arrayError.add("La fecha de nacimiento debe ser mayor al 1 de enero del 2003");
-			mav.setViewName("Accessdeny");
+			
 		}
-		System.out.println(nacimiento);
+	
 		if(lugar.length() > 25 || lugar.length() < 1) {
 			
 			arrayError.add("la longitud del LUGAR DE NACIMIENTO incumple los requisitos, debe ser mayor a 1 y menor a 25");
@@ -64,19 +65,18 @@ public class MainController {
 		}
 		if(celular.length() != 8) {
 			arrayError.add("el CELULAR debe tener 8 digitos!");
-			mav.addObject("req", arrayError);
-			mav.setViewName("Accessdeny");
-			
-			
-		}else {
-			mav.setViewName("Accessgranted");
 		}
 		
-		return mav;
-		
-	}
-	
-	 
+		if(arrayError.isEmpty()){
+			mav.setViewName("Accessgranted");
+		}else {
+			mav.addObject("req", arrayError);
+			mav.setViewName("Accessdeny");
+			}
+			return mav;
+		}
+
+			
 	public boolean compararFecha(String fecha1) throws ParseException {
 		String fechaMin = "2003-01-01";
 		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd"); 
@@ -89,5 +89,5 @@ public class MainController {
 		}else {
 			return false;
 		}  
-		 }
+	}
 }
